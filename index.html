@@ -1,31 +1,673 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Optimizer DC</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
     </head>
     <body>
-        <table>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-        
-        <div id="placas"></div>
+        <div style="display: inline-block;position: absolute;top: 0px;">
+            <table>
+                <tr>
+                    <td>Planchas</td>
+                    <td>
+                        <select id="lst_plancha" onchange="setPlancha(this.value);">
+                            <option value="duraplac">Duraplac (2435 - 2135)</option>
+                            <option value="tablero">Tablero peruano (2435 - 1825)</option>
+                            <option value="faplac">Faplac (2495 - 1825)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" onclick="render();">Optimizar</button>
+                    </td>
+                </tr>
+            </table>
+            <table id="bloques" border="1" style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Largo (w)</th>
+                        <th>Alto (h)</th>
+                        <th>Cant. (c)</th>
+                        <th>Girar (g)</th>
+                        <th>L1</th>
+                        <th>L2</th>
+                        <th>A1</th>
+                        <th>A2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" size="7" class="w">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="h">
+                        </td>
+                        <td>
+                            <input type="text" size="7" class="c">
+                        </td>
+                        <td style="text-align: center">
+                            <input type="checkbox" value="1" class="g">
+                        </td>
+                        <td>
+                            <select class="l1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="l2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a1">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="a2">
+                                <option value="0">--</option>
+                                <option value="D">D</option>
+                                <option value="G">G</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="placas" style="display: inline-block;position: relative;margin-top: 0px;background: #333;left: 500px"></div>
     </body>
-    
+
     <script type="text/javascript" src="libs/jquery/jquery.js" ></script>
     <script type="text/javascript" src="libs/jquery/jquery-ui.js" ></script>
     <script type="text/javascript" src="js/optimizer.jquery.js" ></script>
     <script>
+        var escala = 15;
         
-        $('#placas').optimizer();
+        var plancha = {
+                duraplac: {w: 2435, h: 2135},
+                tablero: {w: 2435, h: 1825},
+                faplac: {w: 2495, h: 1825}
+            };
+        
+        var setPlancha = function (p) {
+            $('#placas').css({
+                width: `${(plancha[p].w / escala)}mm`,
+                height: `${(plancha[p].h / escala)}mm`
+            });
+        };
+
+        setPlancha($('#lst_plancha').val());
+        
+        var render = function(){
+            var pl = $('#lst_plancha').val();
+            
+            var bloques = [], 
+                w = 0, 
+                h = 0,
+                c = 0,
+                g = 0, 
+                l1 = '0', 
+                l2 = '0', 
+                a1 = '0', 
+                a2 = '0';
+            
+            $('#bloques').find('tbody').find('tr').each(function(i,v){
+                w = $(this).find('.w').val();
+                h = $(this).find('.h').val();
+                c = $(this).find('.c').val();
+                g = $(this).find('.g').val();
+                l1 = $(this).find('.l1').val();
+                l2 = $(this).find('.l2').val();
+                a1 = $(this).find('.a1').val();
+                a2 = $(this).find('.a2').val();
+                
+                if($.isNumeric(w) && $.isNumeric(h) && $.isNumeric(c)){
+                    bloques.push({w: w,h: h,c: c,g: g,l1: l1,l2: l2,a1: a1,a2: a2, area: w * h});
+                }
+            });
+            
+            $('#placas').optimizer({
+                blocks: bloques,
+                griddle: plancha[pl]
+            });
+        };
     </script>
 </html>
+<!--
+<p>
+    Speed:
+    <a href=# onclick="g_delay = 0; return false;">fastest</a>
+    <a href=# onclick="g_delay = parseInt(g_delay * 0.8); return false;">faster</a>
+    <a href=# onclick="g_delay = Math.max(g_delay + 1, parseInt(g_delay * 1.2)); return false;">
+        slower</a>
+</p>
+<p>
+    Piece size:
+    <a href=# onclick="update_piece_size(parseInt(Math.max(g_max_rect_size + 1, g_max_rect_size * 1.1))); return false;">bigger</a>
+    <a href=# onclick="update_piece_size(parseInt(Math.max(1, g_max_rect_size * 0.9))); return false;">smaller</a>
+    <a href=# onclick="update_piece_size(1); return false;">smallest</a>
+</p>
+<p>
+    <span id=percentfull></span>% full
+    (<span id=pixelstogo></span> pixels to go)
+</p>
+
+<p><button type="button" onclick="render()">add</button>
+    Next piece:
+    <canvas id=status></canvas>
+</p>
+
+<br>
+
+<canvas id=bin></canvas>
+-->
+<script>/*
+ function Rect(x, y, w, h)
+ {
+ this.x = x;
+ this.y = y;
+ this.w = w;
+ this.h = h;
+ }
+ Rect.prototype.fits_in = function(outer)
+ {
+ return outer.w >= this.w && outer.h >= this.h;
+ }
+ Rect.prototype.same_size_as = function(other)
+ {
+ return this.w == other.w && this.h == other.h;
+ }
+ function Node()
+ {
+ this.left = null;
+ this.right = null;
+ this.rect = null;
+ this.filled = false;
+ }
+ Node.prototype.insert_rect = function(rect)
+ {
+ if(this.left != null)
+ return this.left.insert_rect(rect) || this.right.insert_rect(rect);
+ if(this.filled)
+ return null;
+ if(!rect.fits_in(this.rect))
+ return null;
+ if(rect.same_size_as(this.rect))
+ {
+ this.filled = true;
+ return this;
+ }
+ this.left = new Node();
+ this.right = new Node();
+ var width_diff = this.rect.w - rect.w;
+ var height_diff = this.rect.h - rect.h;
+ var me = this.rect;
+ if(width_diff > height_diff)
+ {
+ // split literally into left and right, putting the rect on the left.
+ this.left.rect = new Rect(me.x, me.y, rect.w, me.h);
+ this.right.rect = new Rect(me.x + rect.w, me.y, me.w - rect.w, me.h);
+ }
+ else
+ {
+ // split into top and bottom, putting rect on top.
+ this.left.rect = new Rect(me.x, me.y, me.w, rect.h);
+ this.right.rect = new Rect(me.x, me.y + rect.h, me.w, me.h - rect.h);
+ }
+ return this.left.insert_rect(rect);
+ }
+ var random_color = function()
+ {
+ var color = [0, 0, 0]
+ for(var i = 0; i <= 2; i++)
+ {
+ if(Math.random() < 0.66666)
+ color[i] = 32 + parseInt(Math.random() * 192);
+ }
+ return 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+ }
+ var width = 800; //w de contenedor
+ var height = 800;//h de contenedor
+ var total_area = width * height;
+ var filled_area = 0;
+ var start_node = new Node();
+ start_node.rect = new Rect(0, 0, width, height);
+ var canvas = document.getElementById('bin');
+ canvas.width = width;
+ canvas.height = height;
+ var status_canvas = document.getElementById('status');
+ g_max_rect_size = null;
+ var update_piece_size = function(size)
+ {
+ g_max_rect_size = size;
+ status_canvas.width = g_max_rect_size;
+ status_canvas.height = g_max_rect_size;
+ }
+ update_piece_size(25); //para tamaño de pieza e miniatuura
+ var status_ctx = status_canvas.getContext('2d');
+ var ctx = canvas.getContext('2d');
+ var timeout_id = null;
+ var percentfull_el = document.getElementById('percentfull');
+ var pixelstogo_el = document.getElementById('pixelstogo');
+ g_delay = 100;
+ 
+ var iteration = function(w,h) {
+ var color = random_color();
+ var rect = new Rect(0, 0, // x/y don't matter here; it has no position yet
+ w,
+ h);
+ status_ctx.fillStyle = '#fff';
+ status_ctx.fillRect(0, 0, w, h);
+ status_ctx.fillStyle = color;
+ status_ctx.fillRect(0, 0, rect.w, rect.h);
+ var node = start_node.insert_rect(rect);
+ if(node)
+ {
+ var r = node.rect;
+ ctx.fillStyle = random_color();
+ ctx.fillRect(r.x, r.y, r.w, r.h);
+ filled_area += r.w * r.h;
+ percentfull_el.innerHTML = ((filled_area / total_area) * 100).toFixed(6);
+ pixelstogo_el.innerHTML = total_area - filled_area;
+ }
+ if(total_area - filled_area)
+ setTimeout(iteration, g_delay);
+ };
+ 
+ function render(){
+ 
+ iteration(500,300);
+ iteration(200,350);
+ iteration(200,350);
+ iteration(100,200);
+ iteration(100,200);
+ iteration(500,300);
+ iteration(500,300);
+ }*/
+</script>
